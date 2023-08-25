@@ -22,6 +22,10 @@ const routes: Routes = [
         component: P1Component,
       },
       {
+        path: 'p1/:id',
+        component: P1Component,
+      },
+      {
         path: 'p2',
         component: P2Component,
       },
