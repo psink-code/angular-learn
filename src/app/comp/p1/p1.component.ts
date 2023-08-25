@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/servizzi/api.service';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-p1',
@@ -7,15 +8,17 @@ import { ApiService } from 'src/app/servizzi/api.service';
   styleUrls: ['./p1.component.css'],
 })
 export class P1Component {
-  games: any;
+  pokem: any;
+  pokemfil: any;
   img: any;
   constructor(private api: ApiService) {}
   ngOnInit(): void {
     this.api
-      .apiepic('https://pokeapi.co/api/v2/pokemon?offset=20&limit=100')
+      .apiepic('https://pokeapi.co/api/v2/pokemon?limit=151')
       .subscribe((data) => {
-        this.games = data;
-        this.games = this.games.results.map((data: any, index: number) => {
+        this.pokem = data;
+
+        this.pokem = this.pokem.results.map((data: any, index: number) => {
           return {
             name: data.name,
             img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
@@ -23,7 +26,14 @@ export class P1Component {
             }.png`,
           };
         });
-        console.log(this.games);
+        console.log(this.pokem);
+        this.pokemfil = this.pokem;
       });
+    this.api.aClickedEvent.subscribe((data: string) => {
+      this.pokem = this.pokemfil;
+      this.pokem = this.pokem.filter((poke: any) => {
+        return poke.name.includes(data);
+      });
+    });
   }
 }

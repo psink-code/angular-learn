@@ -1,12 +1,12 @@
 <mat-grid-list cols="3" rowHeight="2.7:3">
-  <mat-grid-tile *ngFor="let games of games">
+  <mat-grid-tile *ngFor="let poke of pokem">
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{ games.name }}</mat-card-title>
+        <mat-card-title>{{ poke.name }}</mat-card-title>
         <mat-card-subtitle>Dog Breed</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="{{ games.img }}" alt="Photo of a Shiba Inu" />
+      <img mat-card-image src="{{ poke.img }}" alt="Photo of a Shiba Inu" />
       <mat-card-content>
         <p>
           The Shiba Inu is the smallest of the six original and distinct spitz
