@@ -1,0 +1,27 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened
+    ><mat-list role="list">
+      <mat-list-item
+        routerLink="p1"
+        role="listitem"
+        [routerLinkActive]="'active'"
+        >pokemon</mat-list-item
+      >
+      <mat-list-item
+        routerLink="p2"
+        role="listitem"
+        [routerLinkActive]="'active'"
+        >pagina 2</mat-list-item
+      >
+      <mat-list-item
+        routerLink="p3"
+        role="listitem"
+        [routerLinkActive]="'active'"
+        >pagina 3</mat-list-item
+      >
+    </mat-list></mat-drawer
+  >
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
