@@ -30,6 +30,10 @@ const routes: Routes = [
         component: P2Component,
       },
       {
+        path: 'p2/:cat',
+        component: P2Component,
+      },
+      {
         path: 'p3',
         component: P3Component,
       },
