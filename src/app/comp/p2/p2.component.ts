@@ -13,10 +13,11 @@ export class P2Component {
   singlep: any;
   isCard!: boolean;
   idc: any;
-  img: any;
+  img: any = false;
 
   save(data: any) {
-    this.img = data.filter((data: any) => data.id == this.idc);
+    this.img = true;
+    return (this.img = data.filter((data: any) => data.id == this.idc));
   }
 
   ngOnInit(): void {
