@@ -1,1 +1,35 @@
-<p>p2 works!</p>
+<div *ngIf="!isCard; else card">
+  <mat-grid-list cols="3" rowHeight="2.7:3">
+    <mat-grid-tile *ngFor="let cat of cats">
+      <mat-card class="example-card" [routerLink]="['./', cat.id]">
+        <img
+          (click)="save(cat)"
+          height="300px"
+          mat-card-image
+          [src]="cat.url"
+          alt="Photo of a Shiba Inu"
+        />
+        {{ api.ciao(img) }}
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<ng-template #card>
+  <mat-card class="full-card">
+    <img [src]="img" />
+    <mat-card-header>
+      <mat-card-title-group *>
+        <mat-card-subtitle>Extra large</mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
+      placeatciao.
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+<ng-template #i> </ng-template>

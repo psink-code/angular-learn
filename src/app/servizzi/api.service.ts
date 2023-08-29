@@ -16,4 +16,7 @@ export class ApiService {
   scritte(e: any) {
     return this.aClickedEvent.emit(e.target.value);
   }
+  public ciao(e: any) {
+    console.log(e);
+  }
 }

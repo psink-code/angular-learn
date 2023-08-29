@@ -1,10 +1,13 @@
 <div *ngIf="!isCard; ngIfElse: card">
   <mat-grid-list cols="3" rowHeight="2:3">
     <mat-grid-tile *ngFor="let poke of pokem">
-      <mat-card class="example-card">
+      <mat-card class="example-card" routerLink="./{{ poke.idc }}">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{ poke.name }}</mat-card-title>
+
+          {{ this.api.ciao(singlep) }}
+
           <mat-card-subtitle>Dog Breed</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="{{ poke.img }}" alt="Photo of a Shiba Inu" />
@@ -24,15 +27,15 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-<div #card>
+<ng-template #card>
   <mat-card class="full-card">
     <mat-card-header>
       <mat-card-title-group>
-        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-title>{{ this.singlep.name }}</mat-card-title>
         <mat-card-subtitle>Extra large</mat-card-subtitle>
         <img
           mat-card-xxxl-image
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          src="{{ this.singlep.sprites.other.home.front_default }}"
         />
       </mat-card-title-group>
     </mat-card-header>
@@ -40,4 +43,4 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, placeat.
     </mat-card-content>
   </mat-card>
-</div>
+</ng-template>

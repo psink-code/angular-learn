@@ -15,23 +15,25 @@ export class P1Component {
   id!: any;
   singlep: any;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(public api: ApiService, private route: ActivatedRoute) {}
+
   ngOnInit(): void {
     this.isCard = !this.route.snapshot.paramMap.get('id') ? false : true;
     this.id = this.route.snapshot.paramMap.get('id');
-
     this.api
-      .apiepic(`https://pokeapi.co/api/v2/pokemon/3`)
+      .apiepic(`https://pokeapi.co/api/v2/pokemon/${this.id}`)
       .subscribe((data) => {
-        console.log(data);
+        this.singlep = data;
+        console.log(this.singlep);
       });
-    console.log(this.singlep);
     this.api
       .apiepic('https://pokeapi.co/api/v2/pokemon?limit=151')
       .subscribe((data) => {
+        console.log(data);
         this.pokem = data;
         this.pokem = this.pokem.results.map((data: any, index: number) => {
           return {
+            idc: index + 1,
             name: data.name,
             img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${
               index + 1
