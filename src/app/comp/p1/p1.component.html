@@ -1,12 +1,10 @@
 <div *ngIf="!isCard; else card">
-  <mat-grid-list cols="3" rowHeight="2.7:3">
+  <mat-grid-list cols="3" rowHeight="2:3">
     <mat-grid-tile *ngFor="let poke of pokem">
       <mat-card class="example-card" routerLink="./{{ poke.idc }}">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{ poke.name }}</mat-card-title>
-
-          {{ this.api.ciao(singlep) }}
 
           <mat-card-subtitle>Dog Breed</mat-card-subtitle>
         </mat-card-header>

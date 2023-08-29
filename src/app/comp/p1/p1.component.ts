@@ -20,11 +20,11 @@ export class P1Component {
   ngOnInit(): void {
     this.isCard = !this.route.snapshot.paramMap.get('id') ? false : true;
     this.id = this.route.snapshot.paramMap.get('id');
+
     this.api
       .apiepic(`https://pokeapi.co/api/v2/pokemon/${this.id}`)
       .subscribe((data) => {
         this.singlep = data;
-        console.log(this.singlep);
       });
     this.api
       .apiepic('https://pokeapi.co/api/v2/pokemon?limit=151')
