@@ -6,9 +6,10 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/servizzi/api.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-p2',
@@ -19,38 +20,32 @@ export class P2Component implements AfterViewInit {
   constructor(
     public api: ApiService,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private location: Location
   ) {}
   ngAfterViewInit(): void {
     this.idc = this.route.snapshot.paramMap.get('cat');
   }
 
   cats: any;
-  singlep: any;
+  catcard: any;
   isCard!: boolean;
   idc: any;
-  ciao = new Observable((observer) => {
-    console.log('Observable starts');
-    setTimeout(() => {
-      console.log('Returns value');
-      observer.next('1000');
-    }, 5000);
-  });
   img: any = false;
 
   save(cat: any) {
-    setTimeout(() => {
-      console.log(cat);
-
-      this.img = cat;
-      console.log(this.img);
-      this.cdr.detectChanges();
-    }, 1000);
+    this.catcard = cat;
+    this.location.replaceState(`/p2/${this.catcard.id}`);
+    console.log(this.catcard);
+  }
+  clear() {
+    this.catcard = false;
+    this.location.replaceState(`/p2/`);
   }
 
   ngOnInit(): void {
     this.idc = this.route.snapshot.paramMap.get('cat');
-    console.log(this.idc);
 
     this.isCard = !this.route.snapshot.paramMap.get('cat') ? false : true;
     this.api

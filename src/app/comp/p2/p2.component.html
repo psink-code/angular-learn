@@ -1,35 +1,32 @@
-<div *ngIf="!isCard; else card">
-  <mat-grid-list cols="3" rowHeight="2.7:3">
-    <mat-grid-tile *ngFor="let cat of cats">
-      <mat-card class="example-card" [routerLink]="['./', cat.id]">
-        <img
-          (click)="save(cat)"
-          height="300px"
-          mat-card-image
-          [src]="cat.url"
-          alt="Photo of a Shiba Inu"
-        />
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
-<ng-template #card>
-  <div>
-    <mat-card class="full-card" *ngFor="let cat of cats">
-      <mat-card-header *ngIf="ciao | async">
-        <mat-card-title-group>
-          <mat-card-subtitle>Extra large</mat-card-subtitle>
-        </mat-card-title-group>
-        <mat-card-content>
-          <img [src]="cat.url" />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
-          placeatciao.
-        </mat-card-content>
-      </mat-card-header>
+<mat-grid-list cols="3" rowHeight="2.7:3" *ngIf="!catcard; else card">
+  <mat-grid-tile *ngFor="let cat of cats">
+    <mat-card class="example-card">
+      <img
+        (click)="save(cat)"
+        height="300px"
+        mat-card-image
+        [src]="cat.url"
+        alt="Photo of a Shiba Inu"
+      />
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
     </mat-card>
-  </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #card>
+  <mat-card class="full-card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-subtitle>Extra large</mat-card-subtitle>
+        <img height="1000px" [src]="catcard.url" />
+        <button mat-button [routerLink]="['/p2']" (click)="clear()">
+          BECK
+        </button>
+      </mat-card-title-group>
+      <mat-card-content> </mat-card-content>
+    </mat-card-header>
+  </mat-card>
 </ng-template>

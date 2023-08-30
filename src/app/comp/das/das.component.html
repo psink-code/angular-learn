@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened
+  <mat-drawer mode="side" opened *ngIf="menuVar"
     ><mat-list role="list">
       <mat-list-item
         routerLink="p1"
@@ -28,6 +28,7 @@
         mat-icon-button
         class="example-icon"
         aria-label="Example icon-button with menu icon"
+        (click)="menu()"
       >
         <mat-icon>menu</mat-icon>
       </button>
