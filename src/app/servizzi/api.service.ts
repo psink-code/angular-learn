@@ -7,7 +7,7 @@ import { EventEmitter, Output } from '@angular/core';
 })
 export class ApiService {
   @Output() aClickedEvent = new EventEmitter<string>();
-
+  menuVar: boolean = false;
   constructor(private http: HttpClient) {}
 
   apiepic(url: string) {

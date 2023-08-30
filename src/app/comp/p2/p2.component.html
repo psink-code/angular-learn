@@ -1,3 +1,28 @@
+<div class="row col-12 mt-5 ms-2" *ngIf="!catcard; else card">
+  <div class="col-6 my-3" *ngFor="let cat of cats">
+    >
+    <div class="card row bg-secondary img-fluid">
+      <img (click)="save(cat)" mat-card-image [src]="cat.url" class="p-0" />
+    </div>
+  </div>
+</div>
+
+<ng-template #card>
+  <div class="card mb-3 mt-5 pt-3">
+    <img [src]="catcard.url" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <button
+        type="button"
+        [routerLink]="['/p2']"
+        (click)="clear()"
+        class="btn btn-outline-danger"
+      >
+        BECK
+      </button>
+    </div>
+  </div>
+</ng-template>
+<!-- 
 <mat-grid-list cols="3" rowHeight="2.7:3" *ngIf="!catcard; else card">
   <mat-grid-tile *ngFor="let cat of cats">
     <mat-card class="example-card">
@@ -30,3 +55,4 @@
     </mat-card-header>
   </mat-card>
 </ng-template>
+ -->

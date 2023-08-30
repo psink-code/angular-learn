@@ -17,7 +17,7 @@ export class DasComponent {
   showFiller = false;
   private subscription: Subscription;
   rootmap: any;
-  menuVar: boolean = true;
+
   constructor(public api: ApiService, private router: Router) {
     this.rootmap = this.router.url;
     console.log(this.rootmap);
@@ -29,8 +29,8 @@ export class DasComponent {
     });
   }
   menu() {
-    this.menuVar = !this.menuVar;
-    console.log(this.menuVar);
+    this.api.menuVar = !this.api.menuVar;
+    console.log(this.api.menuVar);
   }
   rootrt($route: any) {
     console.log($route);

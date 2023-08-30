@@ -1,4 +1,87 @@
-<mat-drawer-container class="example-container">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 bg-dark fill p-0 position-fixed pe-2" *ngIf="api.menuVar">
+      <ul class="list-group bg-secondary">
+        <li
+          class="list-group-item bg-secondary"
+          routerLink="p1"
+          role="listitem"
+          [routerLinkActive]="'bg-danger'"
+        >
+          Pokedex
+        </li>
+        <li
+          class="list-group-item bg-secondary"
+          routerLink="p2"
+          role="listitem"
+          [routerLinkActive]="'bg-danger'"
+        >
+          Random CAT
+        </li>
+        <li class="list-group-item bg-secondary">A third item</li>
+        <li class="list-group-item bg-secondary">A fourth item</li>
+        <li class="list-group-item bg-secondary">And a fifth one</li>
+      </ul>
+    </div>
+    <div
+      class="pb-5 bg-dark"
+      [ngClass]="{
+        'col-12': !api.menuVar,
+        'col-10 offset-2': api.menuVar
+      }"
+    >
+      <nav
+        class="navbar navbar-expand-lg position-fixed mb-5 bg-dark z-1"
+        [ngClass]="{ 'col-12': !api.menuVar, 'col-10': api.menuVar }"
+      >
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse container-fluid"
+            id="navbarSupportedContent"
+          >
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <button
+                  class="btn btn-light"
+                  (click)="menu()"
+                  type="button"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                *ngIf="rootmap == '/p1'"
+                matInput
+                placeholder="find pokemon"
+                value=""
+                (input)="api.scritte($event)"
+              />
+            </form>
+          </div>
+        </div>
+      </nav>
+      <router-outlet class="pt-5"></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- <mat-drawer-container class="example-container container" autosize>
   <mat-drawer mode="side" opened *ngIf="menuVar"
     ><mat-list role="list">
       <mat-list-item
@@ -33,8 +116,10 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span>My App</span>
-      <span class="example-spacer"></span>
 
+      <span class="example-spacer">
+        <button routerLink="./p2" *ngIf="rootmap == '/p2'">reroll</button></span
+      >
       <input
         *ngIf="rootmap == '/p1'"
         matInput
@@ -44,7 +129,6 @@
       />
 
       <button
-        mat-icon-button
         class="example-icon favorite-icon"
         aria-label="Example icon-button with heart icon"
       >
@@ -61,3 +145,4 @@
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
+ -->
