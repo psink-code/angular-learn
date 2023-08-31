@@ -1,1 +1,40 @@
+<div class="row my-5 pt col-12 justify-content-center" *ngIf="!cart; else list">
+  <div class="card col-2 m-3 p-0" *ngFor="let piatto of piatti">
+    <img [src]="piatto.img" class="img-fluid" alt="..." />
+    <div class="card-body">
+      <h2 class="card-title">{{ piatto.name }}</h2>
+      <p class="card-text">cost {{ piatto.id }}$</p>
 
+      <button class="btn btn-primary" (click)="add(piatto)">
+        Ordina <i class="bi bi-1-square"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #list>
+  <h1 class="text-success text-center pt-5">Prodotti selezionati</h1>
+  <table class="table table-bordered border-danger mt-5">
+    <thead class="text-success pt-5"></thead>
+    <tbody>
+      <tr *ngFor="let piatto of api.carrello" class="text-center centro">
+        <td scope="" class="" style="width: 7rem">
+          <img [src]="piatto.img" alt="" style="width: 6rem" />
+        </td>
+        <td class="table-active align-self-center">
+          {{ piatto.name }}
+        </td>
+        <td>cost {{ piatto.id }}$</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="kik(piatto)"
+          >
+            <i class="bi bi-trash3-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>

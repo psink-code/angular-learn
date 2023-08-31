@@ -1,5 +1,8 @@
-<div class="row col-12 mt-5 ms-2" *ngIf="!isCard; else card">
-  <div class="col-3 my-3 mx-2" *ngFor="let poke of pokem">
+<div
+  class="row col-12 mt-5 ms-2 justify-content-center"
+  *ngIf="!isCard; else card"
+>
+  <div class="col-2 my-3" *ngFor="let poke of pokem">
     <div class="card row bg-secondary" routerLink="./{{ poke.idc }}">
       <img src="{{ poke.img }}" class="img-fluid" alt="..." />
       <div class="card-body">
@@ -13,10 +16,10 @@
   </div>
 </div>
 <ng-template #card>
-  <div class="card mb-3 mt-5 pt-3">
+  <div class="card mb-3 mt-5 pt-3 bg-secondary">
     <img
       src="{{ this.singlep.sprites.other.home.front_default }}"
-      class="card-img-top"
+      class="img-flex"
       alt="..."
     />
     <div class="card-body">

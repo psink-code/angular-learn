@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-2 bg-dark fill p-0 position-fixed pe-2" *ngIf="api.menuVar">
-      <ul class="list-group bg-secondary">
+      <ul class="list-group bg-secondary mt-3">
         <li
           class="list-group-item bg-secondary"
           routerLink="p1"
@@ -18,7 +18,14 @@
         >
           Random CAT
         </li>
-        <li class="list-group-item bg-secondary">A third item</li>
+        <li
+          class="list-group-item bg-secondary"
+          routerLink="p3"
+          role="listitem"
+          [routerLinkActive]="'bg-danger'"
+        >
+          Random menu
+        </li>
         <li class="list-group-item bg-secondary">A fourth item</li>
         <li class="list-group-item bg-secondary">And a fifth one</li>
       </ul>
@@ -31,7 +38,7 @@
       }"
     >
       <nav
-        class="navbar navbar-expand-lg position-fixed mb-5 bg-dark z-1"
+        class="navbar navbar-expand-lg position-fixed bg-dark z-1"
         [ngClass]="{ 'col-12': !api.menuVar, 'col-10': api.menuVar }"
       >
         <div class="container-fluid">
@@ -73,10 +80,22 @@
                 (input)="api.scritte($event)"
               />
             </form>
+            <button
+              class="btn btn-success position-relative"
+              *ngIf="rootmap == '/p3'"
+              routerLink="/p3/cart"
+            >
+              <div
+                class="position-absolute top-50 start-0 translate-middle cerchio"
+              >
+                {{ api.carrello.length }}
+              </div>
+              <i class="bi bi-cart4"></i>
+            </button>
           </div>
         </div>
       </nav>
-      <router-outlet class="pt-5"></router-outlet>
+      <router-outlet class="container-luid"></router-outlet>
     </div>
   </div>
 </div>

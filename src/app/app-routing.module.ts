@@ -37,6 +37,10 @@ const routes: Routes = [
         path: 'p3',
         component: P3Component,
       },
+      {
+        path: 'p3/cart',
+        component: P3Component,
+      },
     ],
   },
   {

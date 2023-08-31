@@ -1,3 +1,5 @@
+@import "node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
 .example-container {
   position: absolute;
   top: 0;
@@ -13,4 +15,11 @@
 }
 .fill {
   height: 100%;
+}
+.cerchio {
+  border-radius: 50%;
+  background-color: blueviolet;
+  height: 50%;
+  width: 50%;
+  align-items: centers;
 }
