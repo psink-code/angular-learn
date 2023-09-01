@@ -81,14 +81,24 @@
               />
             </form>
             <button
+              class="btn btn-light position-relative mx-3"
+              *ngIf="rootmap == '/p3'"
+              (click)="api.scritte($event)"
+            >
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+            {{ api.ciao(api.carrello) }}
+            <button
               class="btn btn-success position-relative"
               *ngIf="rootmap == '/p3'"
               routerLink="/p3/cart"
+              [disabled]="api.carrello.length == 0"
             >
               <div
+                *ngIf="api.carrello.length != 0"
                 class="position-absolute top-50 start-0 translate-middle cerchio"
               >
-                {{ api.carrello.length }}
+                {{ api.carrello.numordini }}
               </div>
               <i class="bi bi-cart4"></i>
             </button>

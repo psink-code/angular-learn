@@ -3,7 +3,7 @@
     <img [src]="piatto.img" class="img-fluid" alt="..." />
     <div class="card-body">
       <h2 class="card-title">{{ piatto.name }}</h2>
-      <p class="card-text">cost {{ piatto.id }}$</p>
+      <p class="card-text">cost {{ piatto.prezzo }}$</p>
 
       <button class="btn btn-primary" (click)="add(piatto)">
         Ordina <i class="bi bi-1-square"></i>
@@ -13,28 +13,103 @@
 </div>
 
 <ng-template #list>
-  <h1 class="text-success text-center pt-5">Prodotti selezionati</h1>
-  <table class="table table-bordered border-danger mt-5">
-    <thead class="text-success pt-5"></thead>
-    <tbody>
-      <tr *ngFor="let piatto of api.carrello" class="text-center centro">
-        <td scope="" class="" style="width: 7rem">
-          <img [src]="piatto.img" alt="" style="width: 6rem" />
-        </td>
-        <td class="table-active align-self-center">
-          {{ piatto.name }}
-        </td>
-        <td>cost {{ piatto.id }}$</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-outline-danger"
-            (click)="kik(piatto)"
-          >
-            <i class="bi bi-trash3-fill"></i>
-          </button>
-        </td>
+  <div class="rounded-4 card bg-secondary mt-5">
+    <h1 class="text-center mt-5">Prodotti selezionati</h1>
+    <table class="table table-bordered border-danger">
+      <tr class="table-primary">
+        <button class="btn btn-danger position-relative my-3" routerLink="/p3">
+          <i class="bi bi-backspace-fill bg-danger"></i>
+        </button>
       </tr>
-    </tbody>
-  </table>
+      <thead class="text-success"></thead>
+      <tbody>
+        <tr *ngFor="let piatto of api.carrello" class="text-center centro">
+          <td scope="" class="" style="width: 7rem">
+            <img [src]="piatto.img" alt="" style="width: 6rem" />
+          </td>
+          <td class="table-active align-self-center">
+            {{ piatto.name }}
+          </td>
+          <td>cost {{ piatto.prezzo * piatto.ordini }}$</td>
+
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="plus(piatto)"
+            >
+              <i class="bi bi-plus"></i>
+            </button>
+            {{ piatto.ordini }}
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="less(piatto)"
+            >
+              <i class="bi bi-dash"></i>
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              (click)="kik(piatto)"
+            >
+              <i class="bi bi-trash3-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div
+      class="modal fade"
+      id="exampleModalToggle"
+      aria-hidden="true"
+      aria-labelledby="exampleModalToggleLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+              Riepilogo ordine
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p *ngFor="let piatto of api.carrello">
+              {{ piatto.name }} x {{ piatto.ordini }}
+            </p>
+            <div>
+              <h3>totale {{ this.api.carrello.sum }} $</h3>
+            </div>
+          </div>
+          <div>
+            <button
+              class="btn btn-warning w-100"
+              aria-label="Close"
+              data-bs-dismiss="modal"
+            >
+              conferma ordine
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      [disabled]="api.carrello.numordini == 0"
+      class="btn btn-warning"
+      data-bs-target="#exampleModalToggle"
+      data-bs-toggle="modal"
+    >
+      ordina
+    </button>
+  </div>
 </ng-template>

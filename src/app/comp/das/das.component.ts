@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { P3Component } from '../p3/p3.component';
 
 @Component({
   selector: 'app-das',
@@ -18,7 +19,11 @@ export class DasComponent {
   private subscription: Subscription;
   rootmap: any;
 
-  constructor(public api: ApiService, private router: Router) {
+  constructor(
+    public api: ApiService,
+    private router: Router
+  ) /*     public p3: P3Component
+   */ {
     this.rootmap = this.router.url;
     console.log(this.rootmap);
 

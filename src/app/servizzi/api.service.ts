@@ -13,7 +13,9 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   apiepic(url: string) {
-    return this.http.get(url);
+    let ciao = this.http.get(url);
+
+    return ciao;
   }
   scritte(e: any) {
     return this.aClickedEvent.emit(e.target.value);
