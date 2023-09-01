@@ -30,21 +30,10 @@ export class P3Component {
   counter() {}
   add(piatto: any) {
     this.num++;
-    let tr: any = [];
-    tr = this.api.carrello.map((data: any) => {
-      if (data.id == piatto.id) {
-        Number(data.ordini) + data.ordini;
-        console.log(data.ordini);
+    piatto['idc'] = this.num;
+    this.api.carrello[this.num] = piatto;
 
-        return true;
-      } else return false;
-    });
-    if (tr != true) {
-      this.api.carrello[this.num] = piatto;
-    }
-    tr = [];
-    console.log(tr);
-    console.log(this.api.carrello[this.num]);
+    console.log(this.api.carrello);
   }
   kik(piatto: any) {
     this.api.carrello = this.api.carrello.filter(
