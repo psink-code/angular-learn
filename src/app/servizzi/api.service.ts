@@ -9,6 +9,8 @@ export class ApiService {
   @Output() aClickedEvent = new EventEmitter<string>();
   menuVar: boolean = false;
   carrello: any = [];
+  numordini: number = 0;
+  sum: number = 0;
 
   constructor(private http: HttpClient) {}
 

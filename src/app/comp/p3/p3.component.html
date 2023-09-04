@@ -87,7 +87,7 @@
               {{ piatto.name }} x {{ piatto.ordini }}
             </p>
             <div>
-              <h3>totale {{ this.api.carrello.sum }} $</h3>
+              <h3>totale {{ this.api.sum }} $</h3>
             </div>
           </div>
           <div>
@@ -104,7 +104,7 @@
     </div>
 
     <button
-      [disabled]="api.carrello.numordini == 0"
+      [disabled]="api.numordini == 0"
       class="btn btn-warning"
       data-bs-target="#exampleModalToggle"
       data-bs-toggle="modal"

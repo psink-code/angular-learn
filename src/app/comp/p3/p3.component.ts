@@ -13,7 +13,6 @@ export class P3Component {
   cart: any;
   lung: any = 0;
   generate() {
-    this.api.carrello['sum'] = 0;
     for (let i = 0; i < 50; i++) {
       this.api
         .apiepic(`https://www.themealdb.com/api/json/v1/1/random.php`)
@@ -47,12 +46,12 @@ export class P3Component {
   }
   plus(piatto: any) {
     piatto.ordini++;
-    this.api.carrello.sum = this.api.carrello.sum + piatto.prezzo;
-    this.api.carrello.numordini++;
+    this.api.sum = this.api.sum + piatto.prezzo;
+    this.api.numordini++;
   }
   less(piatto: any) {
-    this.api.carrello.numordini--;
-    this.api.carrello.sum = this.api.carrello.sum - piatto.prezzo;
+    this.api.numordini--;
+    this.api.sum = this.api.sum - piatto.prezzo;
 
     piatto.ordini--;
     if (piatto.ordini == 0) {
@@ -64,9 +63,9 @@ export class P3Component {
     const uniqueId = Date.now();
     this.num++;
 
-    this.api.carrello['sum'] = this.api.carrello.sum + piatto.prezzo;
+    this.api.sum = this.api.sum + piatto.prezzo;
 
-    this.api.carrello['numordini'] = this.num;
+    this.api.numordini = this.num;
 
     if (this.api.carrello.some((p: any) => p.id === piatto.id)) {
       this.api.carrello.map((data: any) => {
@@ -86,12 +85,12 @@ export class P3Component {
     console.log(this.api.carrello);
   }
   kik(piatto: any) {
-    let ordini1 = Number(this.api.carrello.numordini) - Number(piatto.ordini);
+    let ordini1 = Number(this.api.numordini) - Number(piatto.ordini);
 
     this.api.carrello = this.api.carrello.filter(
       (data: any) => data.ids != piatto.ids
     );
-    this.api.carrello['numordini'] = ordini1;
+    this.api.numordini = ordini1;
     this.num--;
     return this.api.carrello;
   }
