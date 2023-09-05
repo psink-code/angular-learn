@@ -11,6 +11,9 @@ export class ApiService {
   carrello: any = [];
   numordini: number = 0;
   sum: number = 0;
+  numC: number = 0;
+  piatti: any = this.generate();
+  cronos: any = [];
 
   constructor(private http: HttpClient) {}
 
@@ -24,5 +27,29 @@ export class ApiService {
   }
   public ciao(e: any) {
     console.log(e);
+  }
+  generate() {
+    let piatti: any = [];
+
+    for (let i = 0; i < 100; i++) {
+      this.apiepic(
+        `https://www.themealdb.com/api/json/v1/1/random.php`
+      ).subscribe((data: any) => {
+        let nuovoPiatto;
+
+        nuovoPiatto = {
+          name: data.meals[0].strMeal,
+          id: data.meals[0].idMeal,
+          img: data.meals[0].strMealThumb,
+          dess: data.meals[0].strInstructions,
+          prezzo: Math.floor(Math.random() * 100) + 1,
+          ordini: 0,
+          ids: Date.now(),
+        };
+
+        piatti[i] = nuovoPiatto;
+      });
+    }
+    return piatti;
   }
 }

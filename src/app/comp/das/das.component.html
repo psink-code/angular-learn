@@ -38,8 +38,8 @@
       }"
     >
       <nav
-        class="navbar navbar-expand-lg position-fixed bg-dark z-1"
-        [ngClass]="{ 'col-12': !api.menuVar, 'col-10': api.menuVar }"
+        class="navbar navbar-expand-lg sticky-top bg-dark z-1"
+        [ngClass]="{ 'col-12': !api.menuVar }"
       >
         <div class="container-fluid">
           <button
@@ -87,15 +87,14 @@
             >
               <i class="bi bi-arrow-clockwise"></i>
             </button>
-            {{ api.ciao(api.carrello) }}
             <button
               class="btn btn-success position-relative"
               *ngIf="rootmap == '/p3'"
               routerLink="/p3/cart"
-              [disabled]="api.carrello.length == 0"
+              [disabled]="api.numordini == 0"
             >
               <div
-                *ngIf="api.carrello.length != 0"
+                *ngIf="api.numordini != 0"
                 class="position-absolute top-50 start-0 translate-middle cerchio"
               >
                 {{ api.numordini }}

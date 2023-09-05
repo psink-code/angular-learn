@@ -1,13 +1,33 @@
 <div class="row my-5 pt col-12 justify-content-center" *ngIf="!cart; else list">
-  <div class="card col-2 m-3 p-0" *ngFor="let piatto of piatti">
-    <img [src]="piatto.img" class="img-fluid" alt="..." />
-    <div class="card-body">
+  <div
+    class="card col-10 col-lg-3 m-3 p-0 row"
+    *ngFor="let piatto of api.piatti"
+  >
+    <img [src]="piatto.img" class="img-fluid p-0" alt="..." />
+    <div class="card-body row col-12 pe-0">
       <h2 class="card-title">{{ piatto.name }}</h2>
-      <p class="card-text">cost {{ piatto.prezzo }}$</p>
-
-      <button class="btn btn-primary" (click)="add(piatto)">
-        Ordina <i class="bi bi-1-square"></i>
-      </button>
+      <p class="card-text align-self-center">cost {{ piatto.prezzo }}$</p>
+      <div class="row align-items-end text-center col-6 me-4">
+        <button class="btn btn-primary" (click)="add(piatto)">Ordina</button>
+      </div>
+      <div class="row align-items-end text-center col-6">
+        <button
+          type="button "
+          class="btn btn-primary col-4"
+          (click)="plus(piatto)"
+        >
+          <i class="bi bi-plus"></i>
+        </button>
+        <p class="col-4">{{ piatto.ordini }}</p>
+        <button
+          [disabled]="piatto.ordini == 0"
+          type="button "
+          class="btn btn-primary col-4"
+          (click)="less(piatto)"
+        >
+          <i class="bi bi-dash"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -15,12 +35,23 @@
 <ng-template #list>
   <div class="rounded-4 card bg-secondary mt-5">
     <h1 class="text-center mt-5">Prodotti selezionati</h1>
+    <tr class="table-primary">
+      <button
+        class="btn btn-danger position-relative my-3 bg-danger"
+        routerLink="/p3"
+      >
+        <i class="bi bi-backspace-fill bg-danger"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-info bg-info"
+        data-bs-toggle="modal"
+        data-bs-target="#coronologia"
+      >
+        <i class="bi bi-clock bg-info btn-info"> coronologia ordini</i>
+      </button>
+    </tr>
     <table class="table table-bordered border-danger">
-      <tr class="table-primary">
-        <button class="btn btn-danger position-relative my-3" routerLink="/p3">
-          <i class="bi bi-backspace-fill bg-danger"></i>
-        </button>
-      </tr>
       <thead class="text-success"></thead>
       <tbody>
         <tr *ngFor="let piatto of api.carrello" class="text-center centro">
@@ -62,19 +93,19 @@
       </tbody>
     </table>
 
+    <!-- modale 1 -->
+
     <div
       class="modal fade"
-      id="exampleModalToggle"
+      id="ordine"
       aria-hidden="true"
-      aria-labelledby="exampleModalToggleLabel"
+      aria-labelledby="ordineLabel"
       tabindex="-1"
     >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
-              Riepilogo ordine
-            </h1>
+            <h1 class="modal-title fs-5" id="ordineLabel">Riepilogo ordine</h1>
             <button
               type="button"
               class="btn-close"
@@ -92,6 +123,8 @@
           </div>
           <div>
             <button
+              (click)="ordina()"
+              (click)="preparazione(api.cronos)"
               class="btn btn-warning w-100"
               aria-label="Close"
               data-bs-dismiss="modal"
@@ -103,10 +136,62 @@
       </div>
     </div>
 
+    <!-- modale 2 -->
+
+    <div
+      class="modal fade"
+      id="coronologia"
+      aria-hidden="true"
+      aria-labelledby="coronologiaLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="coronologiaLabel">
+              Cronologia ordini
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- *ngIf="api.cronos.length == 0; else vuoto" -->
+            <div *ngFor="let piatto of api.cronos; let i = index">
+              <h1>Ordine {{ i + 1 }}</h1>
+              <div *ngFor="let portata of piatto" class="row">
+                <p
+                  [ngClass]="{
+                    'text-secondary': portata.stato == 'ricevuto',
+                    'text-warning': portata.stato == 'preparazione in corso',
+                    'text-success': portata.stato == 'consegniato'
+                  }"
+                >
+                  {{ portata.name }} x {{ portata.ordini }}
+                  <span class="float-end">{{ portata.stato }}</span>
+                </p>
+              </div>
+              <div>
+                <p class="float-end">Totale ordine {{ piatto.tot }}$</p>
+                <br />
+                <hr />
+              </div>
+            </div>
+          </div>
+          <ng-template #vuoto>
+            <div class="modal-body"><p>Nessun ordine effettuato</p></div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
     <button
       [disabled]="api.numordini == 0"
       class="btn btn-warning"
-      data-bs-target="#exampleModalToggle"
+      data-bs-target="#ordine"
       data-bs-toggle="modal"
     >
       ordina
