@@ -158,8 +158,8 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <!-- *ngIf="api.cronos.length == 0; else vuoto" -->
+          <div class="modal-body" *ngIf="api.cronos.length != 0; else vuoto">
+            <!--  -->
             <div *ngFor="let piatto of api.cronos; let i = index">
               <h1>Ordine {{ i + 1 }}</h1>
               <div *ngFor="let portata of piatto" class="row">

@@ -31,7 +31,7 @@ export class ApiService {
   generate() {
     let piatti: any = [];
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       this.apiepic(
         `https://www.themealdb.com/api/json/v1/1/random.php`
       ).subscribe((data: any) => {

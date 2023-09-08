@@ -93,22 +93,32 @@ export class P3Component {
   }
   preparazione(lista: any) {
     lista.map((data1: any) => {
+      data1['c'] = [];
+      console.log(data1.c);
+
       data1.map((data2: any) => {
         if (!data2.stato) {
           data2['stato'] = this.momento;
         }
       });
-      setInterval(() => {
+      let int = setInterval(() => {
         let i: number = Math.round(Math.random() * Number(data1.length));
         console.log(i);
         if (data1[i].stato == 'consegniato') {
+          if (data1.c.length == data1.length) {
+            clearInterval(int);
+          }
+          if (!data1.c.find((p: any) => p == data1[i].id)) {
+            data1.c.push(data1[i].id);
+            console.log(data1.c);
+          }
           i--;
         } else if (data1[i].stato == 'preparazione in corso') {
           data1[i].stato = 'consegniato';
         } else {
           data1[i].stato = 'preparazione in corso';
         }
-      }, 3000);
+      }, 1000);
     });
   }
 
